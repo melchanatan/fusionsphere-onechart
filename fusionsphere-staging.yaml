@@ -1,0 +1,26 @@
+# this is a default template file for onechart
+image:
+  repository: dockerhub1.matador.ais.co.th/cloudnity/fusionsphere
+  pullPolicy: IfNotPresent
+  tag: latest
+imagePullSecrets:
+  - registry-matador-docker
+
+fullnameOverride: fusionsphere-worker
+nameOverride: fusionsphere-worker
+
+serviceAccount:
+  create: false
+  name: ""
+
+podAnnotations:
+  dapr.io/enabled: "true"
+  dapr.io/app-id: "fusionsphere"
+  dapr.io/app-port: "8084"
+
+autoScaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
