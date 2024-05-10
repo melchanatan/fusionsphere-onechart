@@ -18,9 +18,67 @@ podAnnotations:
   dapr.io/app-id: "fusionsphere"
   dapr.io/app-port: "8084"
 
+service:
+    type: ClusterIP
+    port: 80
+
 autoScaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 1
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
+
+ingress:
+    enabled: false
+
+containerPort: 8084
+probe:
+  enabled: false
+  path: "/health"
+livenessProbe:
+  enabled: false
+  path: "/health"
+
+vars: {}
+secretName: cloudnity-core-env
+
+podSpec:
+  hostAliases:
+  - ip: "10.136.32.101"
+    hostnames:
+    - "captain001g.devinfra.ais"
+  - ip: "10.153.26.21"
+    hostnames:
+    - "captain403g.ictinfra.ais"
+  - ip: "10.233.54.21"
+    hostnames:
+    - "captain803g.ictinfra.ais"
+  - ip: "10.232.213.21"
+    hostnames:
+    - "captain903g.ictinfra.ais"
+  - ip: 10.156.130.21
+    hostnames:
+    - "iam-apigateway-proxy.newcenprod.intra.ais"
+    - "ecs.ais-sila-1.newcenprod.intra.ais"
+    - "vpc.ais-sila-1.newcenprod.intra.ais"
+    - "evs.ais-sila-1.newcenprod.intra.ais"
+    - "ims.ais-sila-1.newcenprod.intra.ais"
+    - "compute.ais.sila1.newcenprod.intra.ais"
+    - "identity.ais.sila1.newcenprod.intra.ais"
+    - "network.ais.sila1.newcenprod.intra.ais"
+    - "volume.ais.sila1.newcenprod.intra.ais"
+    - "iam-apigateway-proxy.ais-sila-1.newcenprod.intra.ais"
+  - ip: 10.156.2.21
+    hostnames:
+    - "ecs.ais-tls-2.newcenprod.intra.ais"
+    - "vpc.ais-tls-2.newcenprod.intra.ais"
+    - "evs.ais-tls-2.newcenprod.intra.ais"
+    - "ims.ais-tls-2.newcenprod.intra.ais"
+    - "compute.ais.tls2.newcenprod.intra.ais"
+    - "identity.ais.tls2.newcenprod.intra.ais"
+    - "network.ais.tls2.newcenprod.intra.ais"
+    - "volume.ais.tls2.newcenprod.intra.ais"
+    - "iam-apigateway-proxy.ais-tls-2.newcenprod.intra.ais"
+    - "sc.newcenprod.intra.ais"
+
